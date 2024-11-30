@@ -37,8 +37,7 @@ public class SendNotifyImpl implements SendNotifyI {
             "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null; " +
             "$template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02); " +
             "$text = $template.GetElementsByTagName('text'); " +
-            "$text[0].AppendChild($template.CreateTextNode('Notification')) | Out-Null; " +
-            "$text[1].AppendChild($template.CreateTextNode('" + message + "')) | Out-Null; " +
+            "$text[0].AppendChild($template.CreateTextNode('" + message + "')) | Out-Null; " +
             "$toast = [Windows.UI.Notifications.ToastNotification]::new($template); " +
             "[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('AppName').Show($toast)"
         ).start();
