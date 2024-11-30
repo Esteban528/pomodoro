@@ -2,4 +2,4 @@
 
 This project is a small concurrent tool for using the pomodoro technique.
 
-![Demo video](./demo.mp4)
+![Demo video](./demo.gif)
