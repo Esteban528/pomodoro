@@ -1,0 +1,5 @@
+# output files
+
+*.o
+*.a
+pomodoro-timer

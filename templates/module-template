@@ -1,0 +1,4 @@
+#ifndef <MODULE_NAME>
+#define <MODULE_NAME>
+
+#endif  /* <MODULE_NAME> */
