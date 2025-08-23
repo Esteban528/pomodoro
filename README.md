@@ -9,6 +9,9 @@
 ## Compilation:
 `make clean debug`
 
+## Normal usage:
+```$ pomodoro-timer```
+
 ## Nix usage:
 `nix run github:Esteban528/pomodoro`
 
