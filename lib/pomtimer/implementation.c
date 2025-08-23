@@ -2,31 +2,33 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <unistd.h>
 
 typedef struct {
-  int main_time;
-  int rest_time;
-  int long_rest_time;
-  int times;
+  uint8_t main_time;
+  uint8_t rest_time;
+  uint8_t long_rest_time;
+  uint8_t times;
   pomtimer_runnable func;
 } time_config_t;
 
-static pthread_t thr;
+static pthread_t     thr;
 static time_config_t tc;
-int current_time;
+
+uint8_t current_time;
 volatile bool running = false;
 
-void *thrd_fun(void*);
-int init_thread(time_config_t*);
-void sleep_run(int);
+void* thrd_fun   (void*);
+uint8_t   init_thread(time_config_t*);
+void  sleep_run  (uint8_t);
 
-int start_pom(int main_time, int rest, int rest_long, int times, pomtimer_runnable func) {
+uint8_t start_pom(uint8_t main_time, uint8_t rest, uint8_t rest_long, uint8_t times, pomtimer_runnable func) {
   tc.main_time = main_time;
   tc.rest_time = rest;
+  tc.times     = times;
+  tc.func      = func;
   tc.long_rest_time = rest_long;
-  tc.times = times;
-  tc.func = func;
   
   running = true;
   init_thread(&tc);
@@ -39,7 +41,7 @@ void stop_pom(pomtimer_runnable func){
   func(NULL);
 }
 
-int init_thread(time_config_t *time_data) {
+uint8_t init_thread(time_config_t *time_data) {
 
   if (pthread_create(&thr, NULL, thrd_fun, time_data) != 0) {
       perror("pthread_create failed");
@@ -56,7 +58,7 @@ void *thrd_fun(void *arg) {
 
   pomtimer_status_t status = {
     .local_times = 0,
-    .sleep_time = time_data->main_time,
+    .sleep_time  = time_data->main_time,
     .focused = false
   };
 
@@ -66,7 +68,7 @@ void *thrd_fun(void *arg) {
 
     if (status.local_times < time_data->times && status.focused == false) {
       status.sleep_time = time_data->main_time;
-      status.focused = true;
+      status.focused    = true;
       status.local_times++;
 
     } else if (status.local_times < time_data->times && status.focused == true) {
@@ -87,7 +89,7 @@ void *thrd_fun(void *arg) {
   return NULL;
 }
 
-void sleep_run(int min){
+void sleep_run(uint8_t min){
   current_time = 0;
   for (int i = 0; i < (minconvert(min)) && running; i++){
     current_time++;
@@ -95,6 +97,6 @@ void sleep_run(int min){
   }
 }
 
-int minconvert(int min) {
+uint8_t minconvert(uint8_t min) {
   return min*60; 
 }

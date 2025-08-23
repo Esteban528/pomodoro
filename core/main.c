@@ -1,12 +1,13 @@
-#include <stdio.h>
 #include <pomtimer/interface.h>
 #include <notify/interface.h>
 #include <unistd.h>
+#include <stdint.h>
+#include <stdio.h>
 
 void notify_runnable(pomtimer_status_t *);
 void notify_stop_runnable(pomtimer_status_t *);
 
-int process_action(int *action){
+uint8_t process_action(uint8_t *action){
   printf("Selected: %d\n", *action);
 
   switch(*action){
@@ -15,27 +16,27 @@ int process_action(int *action){
       show("Pomodoro started", "");
       break;
     case 2:
-      int main_time = 25, rest_time = 5, long_rest_time = 20, times = 4;
+      uint8_t main_time = 25, rest_time = 5, long_rest_time = 20, times = 4;
       printf("\nFocus time (Minutes): ");
-      if (scanf("%d", &main_time) != 1) {
+      if (scanf("%d",(int*) &main_time) != 1) {
         fprintf(stderr, "Invalid input!\n");
         return 1;
       }
 
       printf("\nRest time (Minutes): ");
-      if (scanf("%d", &rest_time) != 1) {
+      if (scanf("%d",(int*) &rest_time) != 1) {
         fprintf(stderr, "Invalid input!\n");
         return 1;
       }
 
       printf("\nLong rest time (Minutes): ");
-      if (scanf("%d", &long_rest_time) != 1) {
+      if (scanf("%d",(int*) &long_rest_time) != 1) {
         fprintf(stderr, "Invalid input!\n");
         return 1;
       }
 
       printf("\nTimes: ");
-      if (scanf("%d", &times) != 1) {
+      if (scanf("%d",(int*) &times) != 1) {
         fprintf(stderr, "Invalid input!\n");
         return 1;
       }
@@ -50,8 +51,8 @@ int process_action(int *action){
   return 0;
 }
 
-int main() {
-    int option = 0;
+void main() {
+    uint8_t option = 0;
     // start_pom(10,5,8,4, notify_runnable);
     // stop_pom(notify_stop_runnable);
 
@@ -84,7 +85,7 @@ int main() {
           continue;
       }
 
-      if (sscanf(input, "%d", &option) != 1) {
+      if (sscanf(input, "%d",(int*) &option) != 1) {
           fprintf(stderr, "Type a valid number!\n");
       } else {
           process_action(&option);
