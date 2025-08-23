@@ -1,11 +1,36 @@
-* Image Viewer: a proof of concept
+# Pomodoro timer
 
-** Compilation
+## Dependencies:
+- gcc
+- pkg-config
+- make
+- libnotify
 
-```sh
-	make clean release
+## Compilation:
+`make clean debug`
+
+## Nix usage:
+`nix run github:Esteban528/pomodoro`
+
+## NixOS Install:
+
+flake.nix
+```nix 
+# add the input
+pomodoro.url = "github:Esteban528/pomodoro";
 ```
 
-for further information about other commands, simply type `make`.
+```nix 
+# declare the package
+inputs.pomodoro.packages.${system}.default
+```
 
-*this project is being done while we eat bread*
+## Other Linux distros 
+
+- Install all dependencies
+- clone the repo
+- `make clean install`
+
+---
+# license
+Public domain

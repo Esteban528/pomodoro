@@ -36,6 +36,13 @@ debug: $(LIBS_OBJ) $(CORE_OBJ)
 	$(SILENT) echo "LD $(PROGRAM)"
 	$(SILENT) $(CC) $(CFLAGS) $(CORE_OBJ) $(LIBS_OBJ) -o $(PROGRAM)
 
+install: $(LIBS_OBJ) $(CORE_OBJ)
+#@ build program and install it 
+	$(SILENT) echo "LD $(PROGRAM)"
+	$(SILENT) $(CC) $(CFLAGS) $(CORE_OBJ) $(LIBS_OBJ) -o $(PROGRAM)
+	$(SILENT) cp pomodoro-timer /usr/local/bin
+	$(SILENT) echo "pomodoro-timer installed. Use: 'pomodoro-timer'"
+
 test:
 #@ build test program
 	$(SILENT) echo "TODO: test library and stuff pending"
