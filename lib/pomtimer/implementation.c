@@ -17,6 +17,7 @@ static pthread_t     thr;
 static time_config_t tc;
 
 uint8_t current_time;
+bool focused;
 volatile bool running = false;
 
 void* thrd_fun   (void*);
@@ -81,6 +82,7 @@ void *thrd_fun(void *arg) {
       status.local_times = 0;
     }
 
+    focused = status.focused;
     time_data->func(&status);
     sleep_run(status.sleep_time);
   }
@@ -91,12 +93,12 @@ void *thrd_fun(void *arg) {
 
 void sleep_run(uint8_t min){
   current_time = 0;
-  for (int i = 0; i < (minconvert(min)) && running; i++){
+  for (uint16_t i = 0; (i < (minconvert(min))) && running; i++){
     current_time++;
     sleep(1);
   }
 }
 
-uint8_t minconvert(uint8_t min) {
+uint16_t minconvert(uint8_t min) {
   return min*60; 
 }
