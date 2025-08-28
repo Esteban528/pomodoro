@@ -1,13 +1,19 @@
 include ../../makefile.conf
 
-OUTPUT=pomtimer
+OUTPUT = pomtimer
 
-SRC=$(wildcard *.c)
-OBJ=$(patsubst %.c, obj/%.o, $(SRC))
+SRC    = $(wildcard *.c)
+OBJ    = $(patsubst %.c, obj/%.o, $(SRC))
 
 $(OUTPUT).a: $(OBJ)
-	@ ar rcs ../../obj/$@ $(OBJ)
+	@ echo "  AR $@"
+	@ ar rcs ../../obj/$(OUTPUT).a $(OBJ)
 
-obj/%.o: %.c
+obj/%.o: %.c | obj
 	@ echo "  CC $<"
 	@ $(CC) $(CFLAGS) -I. -c $< -o $@
+
+obj:
+	@ mkdir -p obj
+
+.PHONY: obj

@@ -55,10 +55,15 @@ run:
 #@ executes the program once generated (will freak out if you don't compile anything)
 	$(SILENT) ./$(PROGRAM)
 
-obj/%.o: core/%.c
+obj:
+	@ mkdir -p obj
+
+.PHONY: obj
+
+obj/%.o: core/%.c | obj
 	$(SILENT) echo "CC $<"
 	$(SILENT) $(CC) $(CFLAGS) -I./lib/ -o $@ -c $<
 
-obj/%.a: lib/%
+obj/%.a: lib/% | obj
 	$(SILENT) echo "MODULE $<"
 	$(SILENT) $(MAKE) -s -C $< CFLAGS="$(CFLAGS)"
