@@ -94,8 +94,9 @@ void *thrd_fun(void *arg) {
 void sleep_run(uint8_t min){
   current_time = 0;
   for (uint16_t i = 0; (i < (minconvert(min))) && running; i++){
-    current_time++;
     sleep(1);
+    if (i % 60 == 0)
+      current_time++;
   }
 }
 

@@ -68,7 +68,7 @@ void main() {
           "Type ^C to exit\n"
       );
       if (running){
-        printf("Current time: %d minutes, ", current_time/60);
+        printf("Current time: %d minutes, ", current_time);
         printf("Status: %s\n", focused ? "Focus mode" : "Rest mode");
       }
       if (!running){
