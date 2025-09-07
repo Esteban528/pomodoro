@@ -19,6 +19,7 @@ static time_config_t tc;
 uint8_t current_time;
 bool focused;
 volatile bool running = false;
+volatile bool pause_s = false;
 
 void* thrd_fun   (void*);
 uint8_t   init_thread(time_config_t*);
@@ -39,6 +40,11 @@ uint8_t start_pom(uint8_t main_time, uint8_t rest, uint8_t rest_long, uint8_t ti
 
 void stop_pom(pomtimer_runnable func){
   running = false;
+  func(NULL);
+}
+
+void pause_pom(pomtimer_runnable func){
+  pause_s = !pause_s;
   func(NULL);
 }
 
@@ -94,6 +100,7 @@ void *thrd_fun(void *arg) {
 void sleep_run(uint8_t min){
   current_time = 0;
   for (uint16_t i = 0; (i < (minconvert(min))) && running; i++){
+    while(pause_s){}
     sleep(1);
     if (i % 60 == 0)
       current_time++;

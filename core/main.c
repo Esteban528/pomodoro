@@ -6,6 +6,7 @@
 
 void notify_runnable(pomtimer_status_t *);
 void notify_stop_runnable(pomtimer_status_t *);
+void notify_pause_runnable(pomtimer_status_t *);
 
 uint8_t process_action(uint8_t *action){
   printf("Selected: %d\n", *action);
@@ -46,6 +47,9 @@ uint8_t process_action(uint8_t *action){
     case 3:
       stop_pom(notify_stop_runnable);
       break;
+    case 4:
+      pause_pom(notify_pause_runnable);
+      break;
   }
 
   return 0;
@@ -77,6 +81,12 @@ void main() {
       }
       if (running){
         printf("3. Stop timer\n");
+      }
+      if (running){
+        if (pause_s)
+          printf("4. Resume timer\n");
+        else
+          printf("4. Pause timer\n");
       }
 
       putchar('\n');
@@ -111,4 +121,8 @@ void notify_runnable(pomtimer_status_t *timer_data){
 
 void notify_stop_runnable(pomtimer_status_t *_){
   show("Pomodoro stopped", "The timer is not longer running");
+}
+
+void notify_pause_runnable(pomtimer_status_t *_){
+  show("Pomodoro pause", pause_s ? "Timer paused" : "Timer resumed");
 }

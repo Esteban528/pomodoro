@@ -15,8 +15,10 @@ typedef void (*pomtimer_runnable)(pomtimer_status_t*);
 uint8_t  start_pom  (uint8_t, uint8_t, uint8_t, uint8_t, pomtimer_runnable);
 void stop_pom   (pomtimer_runnable);
 uint16_t  minconvert (uint8_t);
+void  pause_pom (pomtimer_runnable);
 extern uint8_t current_time;
 extern bool focused;
 extern volatile bool running;
+extern volatile bool pause_s;
 
 #endif  /* POM_TIMER */
