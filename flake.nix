@@ -24,7 +24,7 @@
       devShells = forEachSupportedSystem ({ pkgs, system }: {
         default = pkgs.mkShell {
           packages = with pkgs; [
-            gcc14
+            tinycc
             pkg-config
             libnotify
             gnumake
@@ -39,8 +39,8 @@
           version = "1.0";
           src = ./.;
 
-          nativeBuildInputs = [ pkgs.pkg-config pkgs.gnumake ];
-          buildInputs = [ pkgs.gcc14 pkgs.libnotify ];
+          nativeBuildInputs = [ pkgs.tinycc pkgs.pkg-config pkgs.gnumake ];
+          buildInputs = [ pkgs.libnotify ];
 
           buildPhase = ''
             mkdir -p obj
