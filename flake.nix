@@ -24,9 +24,10 @@
       devShells = forEachSupportedSystem ({ pkgs, system }: {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            dbus.dev
             tinycc
+            gdb
             pkg-config
-            libnotify
             gnumake
           ] ++ (if system == "aarch64-darwin" then [] else [ gdb ]);
         };
@@ -40,21 +41,15 @@
           src = ./.;
 
           nativeBuildInputs = [ pkgs.tinycc pkgs.pkg-config pkgs.gnumake ];
-          buildInputs = [ pkgs.libnotify ];
+          buildInputs = [ dbus.dev ];
 
           buildPhase = ''
-            mkdir -p obj
-            for d in lib/*; do
-              if [ -d "$d" ]; then
-                mkdir -p "$d/obj"
-              fi
-            done
-            make debug 
+            make release
           '';
 
           installPhase = ''
             mkdir -p $out/bin
-            cp pomodoro-timer $out/bin/
+            cp pom_timer $out/bin/
           '';
         };
       });

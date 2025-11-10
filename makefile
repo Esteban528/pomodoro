@@ -1,20 +1,26 @@
 include makefile.conf
 
-PROGRAM=pomodoro-timer
+PROGRAM=pom_timer
 CORE=$(wildcard src/*.c)
 
 CORE_OBJ=$(patsubst %.c, obj/%.o, $(notdir $(CORE)))
 
-.PHONY: debug run obj
+.PHONY: debug run obj clean
 
-CFLAGS=$(CDEPS) $(CDEBUGFLAGS)
+CFLAGS=$(CINC) $(CDEBUGFLAGS)
 debug: $(CORE_OBJ)
-#@ build program with debug in mind
+	# build program with debug in mind
 	$(SILENT) echo "LD $(PROGRAM)"
-	$(SILENT) $(CC) $(CFLAGS) $(CORE_OBJ) -o $(PROGRAM)
+	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) -o $(PROGRAM)
+
+CFLAGS=$(CINC) $(CRELEASEFLAGS)
+release: $(CORE_OBJ)
+	# build program with as release
+	$(SILENT) echo "LD $(PROGRAM)"
+	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) -o $(PROGRAM)
 
 run:
-#@ executes the program once generated (will freak out if you don't compile anything)
+	# executes the program once generated
 	$(SILENT) ./$(PROGRAM)
 
 obj:
@@ -22,4 +28,7 @@ obj:
 
 obj/%.o: src/%.c | obj
 	$(SILENT) echo "CC $<"
-	$(SILENT) $(CC) $(CFLAGS) -o $@ -c $<
+	$(SILENT) $(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf obj $(PROGRAM)
