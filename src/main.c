@@ -28,7 +28,7 @@ uint8_t long_rest_minutes = 10;
 
 int8_t send_notification(char* , char*);
 
-int recv_to() {
+int16_t recv_to() {
   struct timeval tv = {0L, 0L};
   FD_ZERO(&fds);
   FD_SET(STDIN_FILENO, &fds);
@@ -133,7 +133,7 @@ void int_handler(int sig){
   exit(0);
 }
 
-int main(int8_t argc, char *argv[]) {
+int8_t main(int8_t argc, char *argv[]) {
   signal(SIGINT, int_handler);
   start();
   return 0;
