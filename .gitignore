@@ -1,7 +1,3 @@
-# output files
-
 *.o
-*.a
-pomodoro-timer
-result/
-result
+obj
+pom_timer
