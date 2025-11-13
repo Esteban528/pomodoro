@@ -49,7 +49,7 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            cp ./bell.ogg $out/bin/
+            cp bell.ogg $out/bin/
             cp pom_timer $out/bin/
           '';
         };
