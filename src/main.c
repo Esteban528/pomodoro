@@ -28,6 +28,10 @@ uint8_t long_rest_minutes = 10;
 
 int8_t send_notification(char* , char*);
 
+void reproduce_sound() {
+  system("pw-play bell.ogg&");
+}
+
 int16_t recv_to() {
   struct timeval tv = {0L, 0L};
   FD_ZERO(&fds);
@@ -119,6 +123,7 @@ void next_loop(){
   }
 
   send_notification(title, message);
+  reproduce_sound();
   timer(secs, update, next_loop);
 }
 
