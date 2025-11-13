@@ -9,6 +9,8 @@ Simple pomodoro-technique timing tool, supports pause, bell rings when pomodoro 
 ## Usage:
 Just run the binary file and use it.
 
+[Screenshots](https://cloud.estebandev.xyz/public/dir/esteban@estebandev.xyz/PublicGallery/pom)
+
 ## Makefile
 `make <options>`
 `debug` compile to development mode
