@@ -12,10 +12,10 @@ Just run the binary file and use it.
 [Screenshots](https://cloud.estebandev.xyz/public/dir/esteban@estebandev.xyz/PublicGallery/pom)
 
 ## Makefile
-`make <options>`
-`debug` compile to development mode
-`release` compile to "ready to use" mode
-`run` run the binary
+- `make <options>`
+- `debug` compile to development mode
+- `release` compile to "ready to use" mode
+- `run` run the binary
 
 ## Nix
 
