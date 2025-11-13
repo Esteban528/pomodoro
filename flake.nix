@@ -36,7 +36,7 @@
       # Buildable package (nix build)
       packages = forEachSupportedSystem ({ pkgs, system }: {
         default = pkgs.stdenv.mkDerivation {
-          pname = "pomodoro-timer";
+          pname = "pom_timer";
           version = "1.0";
           src = ./.;
 
