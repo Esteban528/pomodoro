@@ -1,3 +1,4 @@
 *.o
 obj
 pom_timer
+result/

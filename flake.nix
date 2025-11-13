@@ -41,7 +41,7 @@
           src = ./.;
 
           nativeBuildInputs = [ pkgs.tinycc pkgs.pkg-config pkgs.gnumake ];
-          buildInputs = [ dbus.dev ];
+          buildInputs = [ pkgs.dbus.dev ];
 
           buildPhase = ''
             make release
@@ -49,6 +49,7 @@
 
           installPhase = ''
             mkdir -p $out/bin
+            cp ./bell.ogg $out/bin/
             cp pom_timer $out/bin/
           '';
         };
