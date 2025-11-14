@@ -44,7 +44,7 @@
           buildInputs = [ pkgs.dbus.dev ];
 
           buildPhase = ''
-            make release
+            make release SOUND_PATH=$out/bin/bell.ogg
           '';
 
           installPhase = ''
