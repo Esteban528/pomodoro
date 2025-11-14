@@ -29,7 +29,7 @@ uint8_t long_rest_minutes = 10;
 int8_t send_notification(char* , char*);
 
 void reproduce_sound() {
-  system("pw-play bell.ogg&");
+  system("pw-play ./bell.ogg&");
 }
 
 int16_t recv_to() {
@@ -139,8 +139,9 @@ void int_handler(int sig){
 }
 
 int8_t main(int8_t argc, char *argv[]) {
-  signal(SIGINT, int_handler);
-  start();
+  // signal(SIGINT, int_handler);
+  // start();
+  reproduce_sound();
   return 0;
 }
 
