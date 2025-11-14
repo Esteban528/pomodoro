@@ -7,6 +7,10 @@
 #include <signal.h>
 #include <dbus/dbus.h>
 
+#ifndef SOUND_PATH
+#define SOUND_PATH "bell.ogg"
+#endif
+
 #define MINUTE_SECONDS 60
 
 typedef void (*pom_runnable)();
@@ -29,7 +33,9 @@ uint8_t long_rest_minutes = 10;
 int8_t send_notification(char* , char*);
 
 void reproduce_sound() {
-  system("pw-play bell.ogg&");
+  char* cmd = "pw-play " SOUND_PATH " --volume 10&";
+
+  system(cmd);
 }
 
 int16_t recv_to() {

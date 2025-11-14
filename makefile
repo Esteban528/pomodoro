@@ -6,18 +6,19 @@ CORE=$(wildcard src/*.c)
 CORE_OBJ=$(patsubst %.c, obj/%.o, $(notdir $(CORE)))
 
 .PHONY: debug run obj clean
+CFLAGS=$(CINC) $(CPPFLAGS)
 
-CFLAGS=$(CINC) $(CDEBUGFLAGS)
+debug: CFLAGS += $(CDEBUGFLAGS)
 debug: $(CORE_OBJ)
 	# build program with debug in mind
 	$(SILENT) echo "LD $(PROGRAM)"
-	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) -o $(PROGRAM)
+	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) $(CFLAGS) -o $(PROGRAM)
 
-CFLAGS=$(CINC) $(CRELEASEFLAGS)
+release: CFLAGS += $(CRELEASEFLAGS)
 release: $(CORE_OBJ)
 	# build program with as release
 	$(SILENT) echo "LD $(PROGRAM)"
-	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) -o $(PROGRAM)
+	$(SILENT) $(CC) $(CORE_OBJ) $(CLIBS) $(CFLAGS) -o $(PROGRAM)
 
 run:
 	# executes the program once generated
